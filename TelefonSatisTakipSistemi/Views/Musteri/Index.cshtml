@@ -1,0 +1,92 @@
+﻿@using TelefonSatisTakipSistemi.Models.Entity;
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLMUSTERİ>
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    /* Sayfalama alanının genel konumu */
+    .pagination-container {
+        display: flex;
+        justify-content: flex-start; /* Sola hizalar */
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    /* Sayıların yan yana dizilmesi */
+    .pagination {
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+    }
+
+        .pagination li {
+            margin-right: 5px; /* Butonlar arası boşluk */
+        }
+
+            /* 4. Butonların (linklerin) tasarımı */
+            .pagination li a {
+                padding: 6px 12px;
+                border: 1px solid #ddd;
+                color: #337ab7;
+                text-decoration: none;
+                border-radius: 4px;
+                background-color: #fff;
+            }
+
+                .pagination li a:hover {
+                    background-color: #eee;
+                }
+
+            /* Aktif sayfa numarası rengi */
+            .pagination li.active a {
+                background-color: #337ab7;
+                color: white;
+                border-color: #337ab7;
+            }
+</style>
+@using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+{
+    <p class="mt-4">
+        <strong>Müşteri Adı veya Soyadı: @Html.TextBox("p")</strong>
+        <input type="submit" value="Ara" class="btn btn-primary" />
+    </p>
+}
+<h2 class="mt-4">Müşteriler</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>ŞEHİR</th>
+        <th>TELEFON</th>
+        <th>E-POSTA</th>
+        <th>ADRES</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.ID</td>
+            <td>@x.AD</td>
+            <td>@x.SOYAD</td>
+            <td>@x.SEHİR</td>
+            <td>@x.TELEFON</td>
+            <td>@x.EPOSTA</td>
+            <td>@x.ADRES</td>
+            <td><a href="/Musteri/MusteriSil/@x.ID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Musteri/MusteriGetir/@x.ID" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<div class="pagination-container">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa,p=Request.QueryString["p"]}))
+</div>
+<a href="/Musteri/YeniMusteri/" class="btn btn-primary">Yeni Müşteri</a>
+

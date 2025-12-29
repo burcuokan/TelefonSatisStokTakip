@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbTelefonSatisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLADMİN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KULLANİCİADİ" Type="varchar" MaxLength="30" />
+          <Property Name="SİFRE" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TBLKATEGORİ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TBLMUSTERİ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="30" />
+          <Property Name="SOYAD" Type="varchar" MaxLength="30" />
+          <Property Name="SEHİR" Type="varchar" MaxLength="30" />
+          <Property Name="TELEFON" Type="varchar" MaxLength="11" />
+          <Property Name="EPOSTA" Type="varchar" MaxLength="50" />
+          <Property Name="ADRES" Type="varchar" MaxLength="100" />
+          <Property Name="DURUM" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBLPERSONEL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="30" />
+          <Property Name="SOYAD" Type="varchar" MaxLength="30" />
+          <Property Name="DEPARTMAN" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TBLSATİSDETAY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SATİSID" Type="int" />
+          <Property Name="URUN" Type="int" />
+          <Property Name="ADET" Type="int" />
+          <Property Name="FİYAT" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TBLSATİSLAR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MUSTERİ" Type="int" />
+          <Property Name="PERSONEL" Type="int" />
+          <Property Name="TARİH" Type="smalldatetime" />
+          <Property Name="TUTAR" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TBLURUNLER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="varchar" MaxLength="50" />
+          <Property Name="MARKA" Type="varchar" MaxLength="50" />
+          <Property Name="MODEL" Type="varchar" MaxLength="50" />
+          <Property Name="KATEGORİ" Type="int" />
+          <Property Name="STOK" Type="int" />
+          <Property Name="ALİSFİYATİ" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SATİSFİYATİ" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ACİKLAMA" Type="varchar" MaxLength="100" />
+          <Property Name="DURUM" Type="bit" />
+        </EntityType>
+        <Association Name="FK_TBLSATİSDETAY_TBLSATİSLAR">
+          <End Role="TBLSATİSLAR" Type="Self.TBLSATİSLAR" Multiplicity="0..1" />
+          <End Role="TBLSATİSDETAY" Type="Self.TBLSATİSDETAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLSATİSLAR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSDETAY">
+              <PropertyRef Name="SATİSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATİSDETAY_TBLURUNLER">
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="0..1" />
+          <End Role="TBLSATİSDETAY" Type="Self.TBLSATİSDETAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLURUNLER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSDETAY">
+              <PropertyRef Name="URUN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATİSLAR_TBLMUSTERİ">
+          <End Role="TBLMUSTERİ" Type="Self.TBLMUSTERİ" Multiplicity="0..1" />
+          <End Role="TBLSATİSLAR" Type="Self.TBLSATİSLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMUSTERİ">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSLAR">
+              <PropertyRef Name="MUSTERİ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATİSLAR_TBLPERSONEL">
+          <End Role="TBLPERSONEL" Type="Self.TBLPERSONEL" Multiplicity="0..1" />
+          <End Role="TBLSATİSLAR" Type="Self.TBLSATİSLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLPERSONEL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSLAR">
+              <PropertyRef Name="PERSONEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLURUNLER_TBLKATEGORİ">
+          <End Role="TBLKATEGORİ" Type="Self.TBLKATEGORİ" Multiplicity="0..1" />
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKATEGORİ">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLURUNLER">
+              <PropertyRef Name="KATEGORİ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTelefonSatisModelStoreContainer">
+          <EntitySet Name="TBLADMİN" EntityType="Self.TBLADMİN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLKATEGORİ" EntityType="Self.TBLKATEGORİ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLMUSTERİ" EntityType="Self.TBLMUSTERİ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLPERSONEL" EntityType="Self.TBLPERSONEL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLSATİSDETAY" EntityType="Self.TBLSATİSDETAY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLSATİSLAR" EntityType="Self.TBLSATİSLAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLURUNLER" EntityType="Self.TBLURUNLER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBLSATİSDETAY_TBLSATİSLAR" Association="Self.FK_TBLSATİSDETAY_TBLSATİSLAR">
+            <End Role="TBLSATİSLAR" EntitySet="TBLSATİSLAR" />
+            <End Role="TBLSATİSDETAY" EntitySet="TBLSATİSDETAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATİSDETAY_TBLURUNLER" Association="Self.FK_TBLSATİSDETAY_TBLURUNLER">
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+            <End Role="TBLSATİSDETAY" EntitySet="TBLSATİSDETAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATİSLAR_TBLMUSTERİ" Association="Self.FK_TBLSATİSLAR_TBLMUSTERİ">
+            <End Role="TBLMUSTERİ" EntitySet="TBLMUSTERİ" />
+            <End Role="TBLSATİSLAR" EntitySet="TBLSATİSLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATİSLAR_TBLPERSONEL" Association="Self.FK_TBLSATİSLAR_TBLPERSONEL">
+            <End Role="TBLPERSONEL" EntitySet="TBLPERSONEL" />
+            <End Role="TBLSATİSLAR" EntitySet="TBLSATİSLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLURUNLER_TBLKATEGORİ" Association="Self.FK_TBLURUNLER_TBLKATEGORİ">
+            <End Role="TBLKATEGORİ" EntitySet="TBLKATEGORİ" />
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbTelefonSatisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLADMİN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KULLANİCİADİ" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SİFRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBLKATEGORİ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBLURUNLER" Relationship="Self.FK_TBLURUNLER_TBLKATEGORİ" FromRole="TBLKATEGORİ" ToRole="TBLURUNLER" />
+        </EntityType>
+        <EntityType Name="TBLMUSTERİ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SOYAD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SEHİR" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFON" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="EPOSTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ADRES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DURUM" Type="Boolean" />
+          <NavigationProperty Name="TBLSATİSLAR" Relationship="Self.FK_TBLSATİSLAR_TBLMUSTERİ" FromRole="TBLMUSTERİ" ToRole="TBLSATİSLAR" />
+        </EntityType>
+        <EntityType Name="TBLPERSONEL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SOYAD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DEPARTMAN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBLSATİSLAR" Relationship="Self.FK_TBLSATİSLAR_TBLPERSONEL" FromRole="TBLPERSONEL" ToRole="TBLSATİSLAR" />
+        </EntityType>
+        <EntityType Name="TBLSATİSDETAY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SATİSID" Type="Int32" />
+          <Property Name="URUN" Type="Int32" />
+          <Property Name="ADET" Type="Int32" />
+          <Property Name="FİYAT" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="TBLSATİSLAR" Relationship="Self.FK_TBLSATİSDETAY_TBLSATİSLAR" FromRole="TBLSATİSDETAY" ToRole="TBLSATİSLAR" />
+          <NavigationProperty Name="TBLURUNLER" Relationship="Self.FK_TBLSATİSDETAY_TBLURUNLER" FromRole="TBLSATİSDETAY" ToRole="TBLURUNLER" />
+        </EntityType>
+        <EntityType Name="TBLSATİSLAR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MUSTERİ" Type="Int32" />
+          <Property Name="PERSONEL" Type="Int32" />
+          <Property Name="TARİH" Type="DateTime" Precision="0" />
+          <Property Name="TUTAR" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="TBLMUSTERİ" Relationship="Self.FK_TBLSATİSLAR_TBLMUSTERİ" FromRole="TBLSATİSLAR" ToRole="TBLMUSTERİ" />
+          <NavigationProperty Name="TBLPERSONEL" Relationship="Self.FK_TBLSATİSLAR_TBLPERSONEL" FromRole="TBLSATİSLAR" ToRole="TBLPERSONEL" />
+          <NavigationProperty Name="TBLSATİSDETAY" Relationship="Self.FK_TBLSATİSDETAY_TBLSATİSLAR" FromRole="TBLSATİSLAR" ToRole="TBLSATİSDETAY" />
+        </EntityType>
+        <EntityType Name="TBLURUNLER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MARKA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MODEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KATEGORİ" Type="Int32" />
+          <Property Name="STOK" Type="Int32" />
+          <Property Name="ALİSFİYATİ" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SATİSFİYATİ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ACİKLAMA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DURUM" Type="Boolean" />
+          <NavigationProperty Name="TBLKATEGORİ" Relationship="Self.FK_TBLURUNLER_TBLKATEGORİ" FromRole="TBLURUNLER" ToRole="TBLKATEGORİ" />
+          <NavigationProperty Name="TBLSATİSDETAY" Relationship="Self.FK_TBLSATİSDETAY_TBLURUNLER" FromRole="TBLURUNLER" ToRole="TBLSATİSDETAY" />
+        </EntityType>
+        <Association Name="FK_TBLURUNLER_TBLKATEGORİ">
+          <End Role="TBLKATEGORİ" Type="Self.TBLKATEGORİ" Multiplicity="0..1" />
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKATEGORİ">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLURUNLER">
+              <PropertyRef Name="KATEGORİ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATİSLAR_TBLMUSTERİ">
+          <End Role="TBLMUSTERİ" Type="Self.TBLMUSTERİ" Multiplicity="0..1" />
+          <End Role="TBLSATİSLAR" Type="Self.TBLSATİSLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMUSTERİ">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSLAR">
+              <PropertyRef Name="MUSTERİ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATİSLAR_TBLPERSONEL">
+          <End Role="TBLPERSONEL" Type="Self.TBLPERSONEL" Multiplicity="0..1" />
+          <End Role="TBLSATİSLAR" Type="Self.TBLSATİSLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLPERSONEL">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSLAR">
+              <PropertyRef Name="PERSONEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATİSDETAY_TBLSATİSLAR">
+          <End Role="TBLSATİSLAR" Type="Self.TBLSATİSLAR" Multiplicity="0..1" />
+          <End Role="TBLSATİSDETAY" Type="Self.TBLSATİSDETAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLSATİSLAR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSDETAY">
+              <PropertyRef Name="SATİSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATİSDETAY_TBLURUNLER">
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="0..1" />
+          <End Role="TBLSATİSDETAY" Type="Self.TBLSATİSDETAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLURUNLER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLSATİSDETAY">
+              <PropertyRef Name="URUN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTelefonSatisEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLADMİN" EntityType="Self.TBLADMİN" />
+          <EntitySet Name="TBLKATEGORİ" EntityType="Self.TBLKATEGORİ" />
+          <EntitySet Name="TBLMUSTERİ" EntityType="Self.TBLMUSTERİ" />
+          <EntitySet Name="TBLPERSONEL" EntityType="Self.TBLPERSONEL" />
+          <EntitySet Name="TBLSATİSDETAY" EntityType="Self.TBLSATİSDETAY" />
+          <EntitySet Name="TBLSATİSLAR" EntityType="Self.TBLSATİSLAR" />
+          <EntitySet Name="TBLURUNLER" EntityType="Self.TBLURUNLER" />
+          <AssociationSet Name="FK_TBLURUNLER_TBLKATEGORİ" Association="Self.FK_TBLURUNLER_TBLKATEGORİ">
+            <End Role="TBLKATEGORİ" EntitySet="TBLKATEGORİ" />
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATİSLAR_TBLMUSTERİ" Association="Self.FK_TBLSATİSLAR_TBLMUSTERİ">
+            <End Role="TBLMUSTERİ" EntitySet="TBLMUSTERİ" />
+            <End Role="TBLSATİSLAR" EntitySet="TBLSATİSLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATİSLAR_TBLPERSONEL" Association="Self.FK_TBLSATİSLAR_TBLPERSONEL">
+            <End Role="TBLPERSONEL" EntitySet="TBLPERSONEL" />
+            <End Role="TBLSATİSLAR" EntitySet="TBLSATİSLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATİSDETAY_TBLSATİSLAR" Association="Self.FK_TBLSATİSDETAY_TBLSATİSLAR">
+            <End Role="TBLSATİSLAR" EntitySet="TBLSATİSLAR" />
+            <End Role="TBLSATİSDETAY" EntitySet="TBLSATİSDETAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATİSDETAY_TBLURUNLER" Association="Self.FK_TBLSATİSDETAY_TBLURUNLER">
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+            <End Role="TBLSATİSDETAY" EntitySet="TBLSATİSDETAY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbTelefonSatisModelStoreContainer" CdmEntityContainer="DbTelefonSatisEntities">
+          <EntitySetMapping Name="TBLADMİN">
+            <EntityTypeMapping TypeName="DbTelefonSatisModel.TBLADMİN">
+              <MappingFragment StoreEntitySet="TBLADMİN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KULLANİCİADİ" ColumnName="KULLANİCİADİ" />
+                <ScalarProperty Name="SİFRE" ColumnName="SİFRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLKATEGORİ">
+            <EntityTypeMapping TypeName="DbTelefonSatisModel.TBLKATEGORİ">
+              <MappingFragment StoreEntitySet="TBLKATEGORİ">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLMUSTERİ">
+            <EntityTypeMapping TypeName="DbTelefonSatisModel.TBLMUSTERİ">
+              <MappingFragment StoreEntitySet="TBLMUSTERİ">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SOYAD" ColumnName="SOYAD" />
+                <ScalarProperty Name="SEHİR" ColumnName="SEHİR" />
+                <ScalarProperty Name="TELEFON" ColumnName="TELEFON" />
+                <ScalarProperty Name="EPOSTA" ColumnName="EPOSTA" />
+                <ScalarProperty Name="ADRES" ColumnName="ADRES" />
+                <ScalarProperty Name="DURUM" ColumnName="DURUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLPERSONEL">
+            <EntityTypeMapping TypeName="DbTelefonSatisModel.TBLPERSONEL">
+              <MappingFragment StoreEntitySet="TBLPERSONEL">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SOYAD" ColumnName="SOYAD" />
+                <ScalarProperty Name="DEPARTMAN" ColumnName="DEPARTMAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLSATİSDETAY">
+            <EntityTypeMapping TypeName="DbTelefonSatisModel.TBLSATİSDETAY">
+              <MappingFragment StoreEntitySet="TBLSATİSDETAY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SATİSID" ColumnName="SATİSID" />
+                <ScalarProperty Name="URUN" ColumnName="URUN" />
+                <ScalarProperty Name="ADET" ColumnName="ADET" />
+                <ScalarProperty Name="FİYAT" ColumnName="FİYAT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLSATİSLAR">
+            <EntityTypeMapping TypeName="DbTelefonSatisModel.TBLSATİSLAR">
+              <MappingFragment StoreEntitySet="TBLSATİSLAR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MUSTERİ" ColumnName="MUSTERİ" />
+                <ScalarProperty Name="PERSONEL" ColumnName="PERSONEL" />
+                <ScalarProperty Name="TARİH" ColumnName="TARİH" />
+                <ScalarProperty Name="TUTAR" ColumnName="TUTAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLURUNLER">
+            <EntityTypeMapping TypeName="DbTelefonSatisModel.TBLURUNLER">
+              <MappingFragment StoreEntitySet="TBLURUNLER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MARKA" ColumnName="MARKA" />
+                <ScalarProperty Name="MODEL" ColumnName="MODEL" />
+                <ScalarProperty Name="KATEGORİ" ColumnName="KATEGORİ" />
+                <ScalarProperty Name="STOK" ColumnName="STOK" />
+                <ScalarProperty Name="ALİSFİYATİ" ColumnName="ALİSFİYATİ" />
+                <ScalarProperty Name="SATİSFİYATİ" ColumnName="SATİSFİYATİ" />
+                <ScalarProperty Name="ACİKLAMA" ColumnName="ACİKLAMA" />
+                <ScalarProperty Name="DURUM" ColumnName="DURUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,31 @@
+﻿@using TelefonSatisTakipSistemi.Models.Entity
+@model List<TBLPERSONEL>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mt-4">Personeller</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>DEPARTMAN</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.ID</td>
+            <td>@x.AD</td>
+            <td>@x.SOYAD</td>
+            <td>@x.DEPARTMAN</td>
+            <td><a href="/Personel/PersonelSil/@x.ID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Personel/PersonelGetir/@x.ID" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Personel/YeniPersonel/" class="btn btn-primary">Yeni Personel </a>
+

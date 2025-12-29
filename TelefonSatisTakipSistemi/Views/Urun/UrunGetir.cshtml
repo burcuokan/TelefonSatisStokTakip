@@ -1,0 +1,36 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLURUNLER
+@{
+    ViewBag.Title = "UrunGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
+{
+    <h2 class="mt-4">Ürün Güncelleme</h2>
+    @Html.HiddenFor(x => x.ID, new { @class="form-control"})
+    <br />
+    <label>Marka</label>
+    @Html.TextBoxFor(x => x.MARKA, new { @class = "form-control" })
+    <br />
+    <label>Model</label>
+    @Html.TextBoxFor(x => x.MODEL, new { @class = "form-control" })
+    <br />
+    <label>Kategori</label>
+    @Html.DropDownListFor(x=>x.TBLKATEGORİ.ID,(List<SelectListItem>)ViewBag.urn,new { @class="form-control"})
+    <br />
+    <label>Stok</label>
+    @Html.TextBoxFor(x => x.STOK, new { @class = "form-control" })
+    <br />
+    <label>Alış Fiyatı</label>
+    @Html.TextBoxFor(x => x.ALİSFİYATİ, new { @class = "form-control" })
+    <br />
+    <label>Satış Fiyatı</label>
+    @Html.TextBoxFor(x => x.SATİSFİYATİ, new { @class = "form-control" })
+    <br />
+    <label>Açıklama</label>
+    @Html.TextAreaFor(x => x.ACİKLAMA, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-warning">Güncelle</button>
+}
+
+

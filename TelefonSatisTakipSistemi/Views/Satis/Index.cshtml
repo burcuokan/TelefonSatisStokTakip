@@ -1,0 +1,31 @@
+﻿@using TelefonSatisTakipSistemi.Models.Entity
+@model List<TBLSATİSLAR>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mt-4">Satışlar</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>MÜŞTERİ</th>
+        <th>PERSONEL</th>
+        <th>TARİH</th>
+        <th>TUTAR</th>
+        <th>İŞLEM</th>
+    </tr>
+    @foreach (var X in Model)
+    {
+        <tr>
+            <td>@X.ID</td>
+            <td>@X.TBLMUSTERİ.AD @X.TBLMUSTERİ.SOYAD</td>
+            <td>@X.TBLPERSONEL.AD @X.TBLPERSONEL.SOYAD</td>
+            <td>@X.TARİH</td>
+            <td>@X.TUTAR</td>
+            <td><a href="/Satis/SatisDetay/@X.ID" class="btn btn-warning">Detay</a></td>
+        </tr>
+    }
+</table>
+<a href="/Satis/YeniSatis/" class="btn btn-primary">Yeni Satış İşlemi</a>
+

@@ -1,0 +1,32 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLADMİN
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mt-4">Profil Bilgilerim</h2>
+@if (ViewBag.hata!=null)
+{
+    <div class="alert alert-danger">@ViewBag.hata</div>
+}
+@if (TempData["Mesaj"]!=null)
+{
+    <div class="alert alert-success">@TempData["Mesaj"]</div>
+}
+
+@using (Html.BeginForm("ProfilGuncelle", "Profil", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.ID, new { @class = "form-control" })
+    <br />
+    <label>Kullanıcı Adı</label>
+    @Html.TextBoxFor(x => x.KULLANİCİADİ, new { @class = "form-control", placeholder = "Kullanıcı Adınız" })
+    <br />
+    <label>Yeni Şifre</label>
+    @Html.PasswordFor(x => x.SİFRE, new { @class = "form-control", placeholder = "Yeni Şifrenizi Giriniz" })
+    <br />
+    <label>Şifre Tekrar</label>
+    <input type="password" name="SifreTekrar" class="form-control" placeholder="Şifrenizi Tekrar Giriniz" id="sifre2" />
+    <br />
+    <button type="submit" class="btn btn-success">Bilgileri Güncelle</button>
+}
+

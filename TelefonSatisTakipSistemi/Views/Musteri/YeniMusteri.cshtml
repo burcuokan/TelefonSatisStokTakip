@@ -1,0 +1,36 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLMUSTERİ
+@{
+    ViewBag.Title = "YeniMusteri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <h2 class="mt-4">Yeni Müşteri Ekleme</h2>
+    <label>Müşteri Adı</label>
+    @Html.TextBoxFor(x => x.AD, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.AD, "", new { @class = "text-danger" })
+    <br />
+    <label>Soyad</label>
+    @Html.TextBoxFor(x => x.SOYAD, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.SOYAD, "", new { @class = "text-danger" })
+    <br />
+    <label>Şehir</label>
+    @Html.TextBoxFor(x => x.SEHİR, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.SEHİR, "", new { @class = "text-danger" })
+    <br />
+    <label>Telefon</label>
+    @Html.TextBoxFor(x => x.TELEFON, new { type = "tel", @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.TELEFON, "", new { @class = "text-danger" })
+    <br />
+    <label>E-Posta</label>
+    @Html.TextBoxFor(x => x.EPOSTA, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EPOSTA, "", new { @class = "text-danger" })
+    <br />
+    <label>Adres</label>
+    @Html.TextAreaFor(x => x.ADRES, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.ADRES, "", new { @class = "text-danger" })
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>
+
+

@@ -1,0 +1,25 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLPERSONEL
+@{
+    ViewBag.Title = "PersonelGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("PersonelGuncelle", "Personel", FormMethod.Post))
+{
+    <h2 class="mt-4">Personel Güncelleme</h2>
+    @Html.HiddenFor(x => x.ID, new { @class = "form-control" })
+    <br />
+    <label>Personel Adı</label>
+    @Html.TextBoxFor(x => x.AD, new { @class = "form-control" })
+    <br />
+    <label>Soyad</label>
+    @Html.TextBoxFor(x => x.SOYAD, new { @class = "form-control" })
+    <br />
+    <label>Departman</label>
+    @Html.TextBoxFor(x => x.DEPARTMAN, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-warning">Güncelle</button>
+
+}
+
+

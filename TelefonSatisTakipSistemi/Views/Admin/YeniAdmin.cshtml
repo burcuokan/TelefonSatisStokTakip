@@ -1,0 +1,29 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLADMİN
+@{
+    ViewBag.Title = "YeniAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fas fa-user-plus"></i>Yeni Admin Ekleme</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("YeniAdmin", "Admin", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.KULLANİCİADİ, new { @class = "form-control", placeholder = "Bir kullanıcı adı giriniz", required = "required" })
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(x => x.SİFRE, new { @class = "form-control", placeholder = "Güçlü bir şifre giriniz", required = "required" })
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success ">
+                    <i class="fas fa-save"></i> Sisteme Kaydet
+                </button>
+            </div>
+        }
+    </div>
+    
+</div>
+

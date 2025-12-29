@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mt-4">İstatistikler</h2>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-4 mb-4">
+            <div class="card bg-primary shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>Toplam Ürün Sayısı</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h2 class="display-4">@ViewBag.toplamurun</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card bg-secondary shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>En Fazla Stoklu Ürün</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h4>@ViewBag.stok</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card bg-danger shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>En Az Stoklu Ürün</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h5>@ViewBag.dusukstok</h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4 mt-4 mb-4">
+            <div class="card bg-warning shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>En Çok Satan Ürün</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h4>@ViewBag.stokurun</h4>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mt-4 mb-4">
+            <div class="card bg-info shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>Toplam Müşteri Sayısı</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h2 class="display-4">@ViewBag.toplammusteri</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4 mb-4">
+            <div class="card bg-dark shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>Kasadaki Toplam Tutar</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h2 class="display-4">@ViewBag.toplamtutar</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4 mb-4">
+            <div class="card bg-success shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>En Çok Ürünü Olan Kategori</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h4>@ViewBag.urun</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4 mb-4">
+            <div class="card bg-primary shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>En Çok Satış Yapan Personel</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h4>@ViewBag.personel</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4 mb-4">
+            <div class="card bg-secondary shadow h-100 w-100">
+                <div class="card-header text-center text-white">
+                    <h5><strong>En Çok Alışveriş Yapan Müşteri</strong></h5>
+                </div>
+                <div class="card-body text-center text-white">
+                    <h4>@ViewBag.musteri</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

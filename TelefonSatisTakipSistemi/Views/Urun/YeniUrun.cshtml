@@ -1,0 +1,41 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLURUNLER
+@{
+    ViewBag.Title = "YeniUrun";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <h2 class="mt-4">Yeni Ürün Ekleme</h2>
+    <br />
+    <label>Marka</label>
+    @Html.TextBoxFor(x => x.MARKA, new { @class="form-control"})
+    @Html.ValidationMessageFor(m => m.MARKA,"", new { @class="text-danger"})
+    <br />
+    <label>Model</label>
+    @Html.TextBoxFor(x => x.MODEL, new { @class="form-control"})
+    @Html.ValidationMessageFor(m => m.MODEL, "", new { @class="text-danger"})
+    <br />
+    <label>Kategori</label>
+    @Html.DropDownListFor(x=>x.TBLKATEGORİ.ID,(List<SelectListItem>)ViewBag.urn, "--- Lütfen Kategori Seçiniz ---", new { @class="form-control"} )
+    @Html.ValidationMessageFor(x => x.KATEGORİ, "", new { @class="text-danger"})
+    <br />
+    <label>Stok</label>
+    @Html.TextBoxFor(x => x.STOK, new { @class="form-control"})
+    @Html.ValidationMessageFor(m => m.STOK, "", new { @class="text-danger"})
+    <br />
+    <label>Alış Fiyatı</label>
+    @Html.TextBoxFor(x => x.ALİSFİYATİ, new { @class="form-control"})
+    @Html.ValidationMessageFor(m => m.ALİSFİYATİ, "", new { @class="text-danger"})
+    <br />
+    <label>Satış Fiyatı</label>
+    @Html.TextBoxFor(x => x.SATİSFİYATİ, new { @class="form-control"})
+    @Html.ValidationMessageFor(m => m.SATİSFİYATİ, "", new { @class="text-danger"})
+    <br />
+    <label>Açıklama</label>
+    @Html.TextAreaFor(x => x.ACİKLAMA, new { @class="form-control"})
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+
+</form>
+
+

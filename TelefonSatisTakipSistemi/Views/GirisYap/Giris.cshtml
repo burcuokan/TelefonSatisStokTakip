@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MVC5 Telefon Satış Takip Sistemi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link href="~/Content/Login.css" rel="stylesheet" />
+</head>
+<body class="login-page">
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+
+        <h1 class="main-title">Giriş Form Paneli</h1>
+
+        <div class="card login-card">
+            <div class="card-body p-5">
+                <h2 class="card-header-title text-center mb-4">MVC5 Ürün Satış Takip</h2>
+
+                @using (Html.BeginForm("Giris", "GirisYap", FormMethod.Post))
+                {
+                    <div class="form-group mb-4">
+                        <label class="text-uppercase small font-weight-bold">Kullanıcı Adı:</label>
+                        <div class="input-group">
+                            <input type="text" name="KULLANİCİADİ" class="form-control custom-input" placeholder="kullanıcı adı" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="text-uppercase small font-weight-bold">Şifre:</label>
+                        <input type="password" name="SİFRE" class="form-control custom-input" placeholder="şifre" required>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4 extra-links">
+                        <a href="#">Şifremi Unuttum</a>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="rememberMe">
+                            <label class="custom-control-label" for="rememberMe">Beni Hatırla</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-login btn-block shadow-sm">GİRİŞ YAP</button>
+                }
+
+                <p class="text-center mt-4 footer-text">
+                    Bir hesabınız yok mu? <a href="#" class="text-info">Kayıt Ol</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

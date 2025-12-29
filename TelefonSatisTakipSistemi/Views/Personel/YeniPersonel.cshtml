@@ -1,0 +1,24 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLPERSONEL
+@{
+    ViewBag.Title = "YeniPersonel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <h2 class="mt-4">Yeni Personel Ekleme</h2>
+    <label>Personel Adı</label>
+    <input type="text" name="AD" class="form-control"/>
+    @Html.ValidationMessageFor(m => m.AD, "", new { @class="text-danger"})
+    <br />
+    <label>Soyad</label>
+    <input type="text"  name="SOYAD" class="form-control"/>
+    @Html.ValidationMessageFor(m => m.SOYAD, "", new { @class="text-danger"})
+    <br />
+    <label>Departman</label>
+    <input type="text" name="DEPARTMAN" class="form-control" />
+    @Html.ValidationMessageFor(m => m.DEPARTMAN, "", new { @class="text-danger"})
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>
+
+

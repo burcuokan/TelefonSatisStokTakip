@@ -1,0 +1,87 @@
+﻿@model List<TelefonSatisTakipSistemi.Models.SepetUrun>
+@{
+    ViewBag.Title = "YeniSatis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Yeni Satış Yap</h2>
+    <hr />
+
+    <div class="card p-3 shadow-sm bg-light">
+        @using (Html.BeginForm("SepetEkle", "Satis", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-5">
+                    <label>Ürün Seçiniz</label>
+                    @Html.DropDownList("UrunID", (List<SelectListItem>)ViewBag.urn, "--- Ürün Seç ---", new { @class = "form-control", required = "required" })
+                </div>
+                <div class="col-md-3">
+                    <label>Adet</label>
+                    <input type="number" name="Adet" value="1" min="1" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label>&nbsp;</label>
+                    <button type="submit" class="btn btn-success d-block w-100">Listeye Ekle</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="mt-4">
+        <h4>Satış Listesi</h4>
+        <table class="table table-bordered table-striped mt-2">
+            <thead class="bg-info text-white">
+                <tr>
+                    <th>Ürün</th>
+                    <th>Birim Fiyat</th>
+                    <th>Adet</th>
+                    <th>Toplam Tutar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UrunTamAd</td>
+                        <td>@item.BirimFiyat.ToString("C2")</td>
+                        <td>@item.Adet</td>
+                        <td><strong>@item.ToplamTutar.ToString("C2")</strong></td>
+                    </tr>
+                }
+                @*Eğer sepette en az 1 tane ürün varsa bu satırı göster*@
+                @if (Model.Count > 0)
+                {
+                    <tr class="table-warning">
+                        <td colspan="3" align="right"><strong>GENEL TOPLAM:</strong></td>
+                        <td><strong>@Model.Sum(x => x.ToplamTutar).ToString("C2")</strong></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.Count > 0)
+    {
+        <div class="card p-3 mt-4 border-primary shadow-sm">
+            <h5 class="text-primary">Satışı Onayla</h5>
+            @using (Html.BeginForm("SatisYap", "Satis", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Müşteri</label>
+                        @Html.DropDownList("MUSTERIID", (List<SelectListItem>)ViewBag.mst, "--- Müşteri Seç ---", new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Personel</label>
+                        @Html.DropDownList("PERSONELID", (List<SelectListItem>)ViewBag.prs, "--- Personel Seç ---", new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="btn btn-primary d-block w-100">SATIŞI TAMAMLA</button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

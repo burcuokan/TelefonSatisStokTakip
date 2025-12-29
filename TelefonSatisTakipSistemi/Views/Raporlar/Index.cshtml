@@ -1,0 +1,39 @@
+﻿@using TelefonSatisTakipSistemi.Models.Entity
+@model List<TBLSATİSLAR>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mt-4">Satış Raporu</h2>
+<form method="get" class="mb-4 mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <input type="date" name="tarih" value="@ViewBag.secilen" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success">Sorgula</button>
+        </div>
+    </div>
+</form>
+  
+<table class="table table-bordered">
+    <tr>
+        <th>MÜŞTERİ</th>
+        <th>PERSONEL</th>
+        <th>SATIŞ TARİHİ</th>
+        <th>TOPLAM TUTAR</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.TBLMUSTERİ.AD @x.TBLMUSTERİ.SOYAD</td>
+            <td>@x.TBLPERSONEL.AD @x.TBLPERSONEL.SOYAD</td>
+            <td>@x.TARİH</td>
+            <td>@x.TUTAR</td>
+        </tr>
+    }
+
+</table>
+<button onclick="window.print()" class="btn btn-primary">Raporu Yazdır / PDF Yap</button>
+

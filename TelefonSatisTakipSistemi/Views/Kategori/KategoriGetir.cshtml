@@ -1,0 +1,20 @@
+﻿@model TelefonSatisTakipSistemi.Models.Entity.TBLKATEGORİ
+@{
+    ViewBag.Title = "KategoriGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("KategoriGuncelle", "Kategori", FormMethod.Post))
+{
+<h2 class="mt-4">Kategori Güncelleme</h2>
+@Html.HiddenFor(x => x.ID, new { @class = "form-control" })
+<br />
+<label>Kategori Adı</label>
+<br />
+@Html.TextBoxFor(x => x.AD, new { @class = "form-control" })
+<br />
+<button class="btn btn-warning">Güncelle</button>
+}
+
+
