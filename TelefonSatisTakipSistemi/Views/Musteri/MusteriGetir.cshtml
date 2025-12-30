@@ -7,20 +7,25 @@
 @using (Html.BeginForm("MusteriGuncelle", "Musteri", FormMethod.Post))
 {
     <h2 class="mt-4">Müşteri Güncelleme</h2>
-    @*<label>Müşteri Adı</label>*@
     @Html.HiddenFor(x => x.ID, new { @class = "form-control" })
     <br />
-    @Html.TextBoxFor(x => x.AD, new { placeholder = "Adınızı giriniz...", @class = "form-control" })
+    <label>Müşteri Adı</label>
+    @Html.TextBoxFor(x => x.AD, new { @class = "form-control" })
     <br />
+    <label>Soyad</label>
     @Html.TextBoxFor(x => x.SOYAD, new { @class = "form-control" })
     <br />
+    <label>Şehir</label>
     @Html.TextBoxFor(x => x.SEHİR, new { @class = "form-control" })
     <br />
+    <label>Telefon</label>
     @Html.TextBoxFor(x => x.TELEFON, new { type = "tel", @class = "form-control" })
     <br />
+    <label>E-Posta</label>
     @Html.TextBoxFor(x => x.EPOSTA, new { @class = "form-control" })
     <br />
-    @Html.TextAreaFor(x => x.ADRES, new { @clas = "form-control" })
+    <label>Adres</label>
+    @Html.TextBoxFor(x => x.ADRES, new { @class="form-control"})
     <br />
     <button class="btn btn-warning">Güncelle</button>
 }
