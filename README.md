@@ -155,11 +155,11 @@ Bu proje, ASP.NET MVC 5 kullanılarak geliştirilmiş bir telefon satış ve sto
 
   **Kategori Güncelleme**
 
-    <img width="1366" height="657" alt="chrome_Z98G6yXFRl" src="https://github.com/user-attachments/assets/baec40c1-d7f2-48ed-950b-6067f07a1ce6" />
+   <img width="1366" height="657" alt="chrome_Z98G6yXFRl" src="https://github.com/user-attachments/assets/4c268c56-557f-48fb-ae91-078767b6d850" />
 
   **Personeller**
 
-    <img width="1366" height="657" alt="chrome_EKtZ4VK0q6" src="https://github.com/user-attachments/assets/9806a613-a73f-4a0c-85c7-3943a4102413" />
+   <img width="1366" height="657" alt="chrome_EKtZ4VK0q6" src="https://github.com/user-attachments/assets/9806a613-a73f-4a0c-85c7-3943a4102413" />
 
  **Yeni Personel Ekleme Paneli**
 
