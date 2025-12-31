@@ -37,6 +37,8 @@ namespace TelefonSatisTakipSistemi.Controllers
         [HttpPost]
         public ActionResult YeniUrun(TBLURUNLER p)
         {
+            ModelState.Remove("KATEGORİ");
+            p.KATEGORİ = p.TBLKATEGORİ.ID;
             if (!ModelState.IsValid)
             {
                 List<SelectListItem> urun = (from k in db.TBLKATEGORİ.ToList()

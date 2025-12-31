@@ -42,7 +42,8 @@ namespace TelefonSatisTakipSistemi.Controllers
             ViewBag.prs = personel;
 
             //Ürün
-            List<SelectListItem> urun = (from x in db.TBLURUNLER.ToList()
+            List<SelectListItem> urun = (from x in db.TBLURUNLER
+                                         where x.DURUM==true
                                          select new SelectListItem
                                          {
                                              Text = x.MARKA + " " + x.MODEL,
@@ -67,7 +68,6 @@ namespace TelefonSatisTakipSistemi.Controllers
         public ActionResult SepetEkle(int UrunID, int Adet)
         {
             var urun = db.TBLURUNLER.Find(UrunID);
-
             // Sepeti hafızadan (Session) çağırıyoruz
             var sepet = (List<SepetUrun>)Session["Sepet"];
             if (sepet == null)
